@@ -1,0 +1,113 @@
+<style>
+        body {
+            padding: 15px;
+        }
+
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }  
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 center-text">
+            <span>{{vm.message}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">Select LFO Waveform:</div>
+        <div class="col-md-4">
+            <select ng-model="vm.lfoWaveShape">
+                <option>--Select A Value--</option>
+                <option value='sine'>Sine</option>
+                <option value='sawtooth'>Saw</option>
+                <option value='triangle'>Triangle</option>
+                <option value='square'>Square</option>
+            </select>    
+        </div>
+        <div class="col-md-4"><button class="btn btn-default"  style="margin:5px;" ng-click="vm.changeLfoWaveform()">Change Waveform</button></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">Select Oscillator1 Waveform:</div>
+        <div class="col-md-4">
+            <select ng-model="vm.oscillatorWaveShape">
+                <option>--Select A Value--</option>
+                <option value='sine'>Sine</option>
+                <option value='sawtooth'>Saw</option>
+                <option value='triangle'>Triangle</option>
+                <option value='square'>Square</option>
+            </select>    
+        </div>
+        <div class="col-md-4"><button class="btn btn-default" style="margin:5px;" ng-click="vm.changeOscillatorWaveform()">Change Waveform</button></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">Select LFO Waveform:</div>
+        <div class="col-md-4">
+            <select ng-model="vm.oscillator2WaveShape">
+                <option>--Select A Value--</option>
+                <option value='sine'>Sine</option>
+                <option value='sawtooth'>Saw</option>
+                <option value='triangle'>Triangle</option>
+                <option value='square'>Square</option>
+            </select>    
+        </div>
+        <div class="col-md-4"><button class="btn btn-default"  style="margin:5px;" ng-click="vm.changeOscillator2Waveform()">Change Waveform</button></div>
+    </div>
+
+      
+      
+    <div class="row">
+        <div class="col-md-3">
+            <audio-knob value='vm.mod.frequency' 
+                           on-change='vm.updateVoices()' 
+                           units='Hz'
+                           step='.25'
+                           min='0'
+                           max='10'
+                           digits='1'
+                           src='{{vm.webAudioKnobImage}}'
+                           sprites='100'
+                           height='80'
+                           width='80'
+                           diameter='64'
+                           sensitivity='2'></audio-knob>            
+        </div>
+        <div class="col-md-3">
+            <ui-select ng-model="vm.person.selected" ng-disabled="vm.disabled" theme="bootstrap" style="min-width: 300px;" title="Select a language" append-to-body="true">
+                <ui-select-match placeholder="Select Waveshape"><img ng-src="{{ $select.selected.url }}" /> {{$select.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="lang in vm.language_list">
+                  <img ng-src="{{ lang.url }}" />
+                  <div ng-bind-html="lang.name" style="display: inline"></div>
+                </ui-select-choices>
+            </ui-select>
+        
+        </div>
+        <div class="col-md-3">
+            <ui-select ng-model="vm.mod.selected" theme="bootstrap">
+                <ui-select-match placeholder="Select Waveshape"><img ng-src="{{ $select.selected.url }}" style="max-height:24px;" /> {{$select.selected.display}}</ui-select-match>
+                <ui-select-choices repeat="waveshape in vm.waveShapes">
+                    <img ng-src="{{waveshape.url}}" />
+                    <div ng-bind-html="waveshape.display" style="display: inline"></div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+            
+</div>
