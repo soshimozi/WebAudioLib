@@ -35,6 +35,8 @@ export default class extends Effect {
         this.resonance = !resonance ? 0.1 : resonance; // 0.0 - 1.0
         this.samplerate = isNaN(sampleRate) ? 44100 : sampleRate;
         this.type = type || 0;
+
+        
     }
 
     calcCoeff () {

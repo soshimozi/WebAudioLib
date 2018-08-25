@@ -181,7 +181,6 @@ class Note {
     }
 
     get frequency() {
-        console.log('coord: ', this.coord);
         return Music.baseFreq * Math.pow(2.0, (this.coord[0] * 1200 + this.coord[1] * 700) / 1200);
     }
 

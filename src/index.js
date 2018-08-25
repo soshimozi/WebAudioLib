@@ -1,6 +1,7 @@
 import '../node_modules/font-awesome/css/font-awesome.css';
 import './styles/main.less';
 import './styles/webaudio-knob.less';
+import './styles/webaudio-keyboard.less';
 import '../node_modules/ui-select/dist/select.css'
 
 import 'bootstrap';
@@ -24,6 +25,7 @@ import HomeController from './controllers/home-controller';
 app.controller('HomeController', HomeController);
 
 app.directive('audioKnob', require('./directives/webaudio-knob'));
+app.directive('audioKeyboard', require("./directives/webaudio-keyboard"));
 
 app.config(['$routeProvider', '$locationProvider', '$httpProvider', 'uiSelectConfig', ($routeProvider, $locationProvider, uiSelectConfig) => {
 

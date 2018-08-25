@@ -1,0 +1,50 @@
+.webaudio-keyboard{
+    display:inline-block;
+    position:relative;
+    margin:0;
+    padding:0;
+    font-family: sans-serif;
+    font-size: 11px;
+}
+
+.webaudio-keyboard-body{
+    display:inline-block;
+    margin:0;
+    padding:0;
+}
+
+.webaudioctrl-tooltip{
+    display:inline-block;
+    position:absolute;
+    margin:0 -1000px;
+    z-index: 999;
+    background:#eee;
+    color:#000;
+    border:1px solid #666;
+    border-radius:4px;
+    padding:5px 10px;
+    text-align:center;
+    left:0; top:0;
+    font-size:11px;
+    opacity:0;
+    visibility:hidden;
+  }
+  .webaudioctrl-tooltip:before{
+    content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+       margin-left: -8px;
+      border: 8px solid transparent;
+      border-top: 8px solid #666;
+  }
+  .webaudioctrl-tooltip:after{
+    content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+       margin-left: -6px;
+      border: 6px solid transparent;
+      border-top: 6px solid #eee;
+  }
+  

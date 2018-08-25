@@ -26,7 +26,7 @@ const WebaudioKnob = function($timeout, $window) {
             disable: '@',            
             onChange: '&'
         },
-        template: require('../views/webaudio-template'),
+        template: require('../views/controls/webaudio-control'),
         bindToController: true,
         controllerAs: 'vm',
         controller: function () { 
