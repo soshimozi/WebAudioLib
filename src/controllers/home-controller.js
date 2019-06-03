@@ -11,6 +11,7 @@ import IIRFilterNode from '../audio/dsp/iir-filter';
 import ParameterNode from '../audio/core/parameter-node';
 import KeySpline from '../audio/key-spline';
 import Bezier from '../audio/bezier';
+import Noise from '../audio/noise';
 
 export default class {
 
@@ -74,7 +75,6 @@ export default class {
         this.noteOffTime = null;
         this.disabled = undefined;
         this.person = {};
-        this.language_list = [{'name': 'english', 'url': 'https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/gb.png'},{'name': 'italian', 'url': 'https://raw.githubusercontent.com/stevenrskelton/flag-icon/master/png/16/country-4x3/it.png'}];
                   
         let nt = this.nt = Note.fromLatin('A4');
 
@@ -83,32 +83,7 @@ export default class {
         console.log(nt.add('fifth').frequency);
         console.log('Sink:', Sink);
 
-        const easing = {
-             "ease": [0.25, 0.1, 0.25, 1.0],
-             "linear":      [0.00, 0.0, 1.00, 1.0],
-             "ease-in":     [0.42, 0.0, 1.00, 1.0],
-             "ease-out":    [0.00, 0.0, 0.58, 1.0],
-             "ease-in-out": [0.42, 0.0, 0.58, 1.0]             
-        };
-
-        var spline = new KeySpline(0.04, 0.02, 0.99, 0.01);
-        console.log('spline', spline);
-
-        console.log("0:", spline.get(0));
-        console.log(".25:", spline.get(.25));
-        console.log(".50:", spline.get(.50));
-        console.log(".75:", spline.get(.75));
-        console.log("1.0:", spline.get(1.0));
-
         const e = new Bezier(0.04, 0.02, 0.99, 0.01);
-        console.log(1 - e(0));
-        console.log(1 - e(.25));
-        console.log(1 - e(.5));
-        console.log(1 - e(.75));
-        console.log(1 - e(.9));
-        console.log(1 - e(1.0));
-
-    
 
         //let audioLib = new AudioLib();
         //let sine = new OscillatorNode(audioLib, nt.frequency);
@@ -116,8 +91,6 @@ export default class {
         //sine.connect(audioLib.output);        
 
         this.paused = true;
-
-        this.logged = false;
 
         this.noteOn = false;
 
@@ -191,15 +164,11 @@ export default class {
     onNote(n) {
         let notes = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#","A", "A#", "B"];
 
-        console.log('n:', n);
-
         let oct = 4;
 
         let noteName;
         if(n[1] >= 12) {
             oct++;
-
-            console.log('n[1]: ', n[1]);
 
             if(n[1] == 24) {
                 oct++;
@@ -272,8 +241,6 @@ export default class {
 
     pause() {
         this.paused = true;
-
-        console.log('selected', this.mod.selected);
     }
 
     play() {
@@ -311,33 +278,4 @@ export default class {
     }    
 }
 
-class Mixer {
-    constructor(bufferSize, channels) {
-        this.channels = channels || 1;
-        this.bufferSize = bufferSize || 1024
-
-        this.inputs = [];
-
-        this.inputs.push(new Float32Array(this.bufferSize * channels));
-        this.inputs.push(new Float32Array(this.bufferSize * channels));
-        //this.inputs.push(new Float32Array(this.bufferSize * channels));
-
-        this.output = new Float32Array(this.bufferSize * channels);
-
-        this.sample = 0;
-    }
-
-    generate() {
-
-        this.sample = 0;
-        for(let j=0; j<this.inputs.length; j++) {
-            this.sample += this.inputs[j];
-        }
-
-    }
-
-    getMix() {
-        return this.sample;
-    }
-}
 
