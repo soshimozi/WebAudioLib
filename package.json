@@ -21,7 +21,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "ng-sanitize": "0.0.2",
     "popper": "^1.0.1",
     "ui-select": "^0.19.8",
